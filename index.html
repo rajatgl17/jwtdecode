@@ -1,97 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  	<title>Online Decode JWT (JSON Web Tokens)</title>
+  	<title>Free Online Decode JWT (JSON Web Tokens)</title>
     <meta charset="UTF-8">
     <link rel="canonical" href="https://jwtdecode.com" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Free and open-source tool for decoding JSON Web Tokens (JWTs) on the client side. No records are kept of any decoded tokens." />
 		<meta name="keywords" content="jwt, decode, online, tool" />
 		<meta name="robots" content="index, follow" />
-    <link rel="icon" href="./logo.jpg" type="image/x-icon">
+    <link rel="icon" href="./favicon.png" type="image/x-icon"> <!-- https://icons8.com/icon/49445/key -->
+    <meta name="author" content="Rajat Goel">
     <meta property="og:url" content="https://jwtdecode.com" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Online decode JWT" />
     <meta property="og:description" content="Free and open-source tool for decoding JSON Web Tokens (JWTs) on the client side. No records are kept of any decoded tokens."/>
     <meta property="og:locale" content="en_US" />
-    <meta property="og:image" content="https://jwtdecode.com/logo.jpg" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <meta property="og:image" content="https://jwtdecode.com/logo.png" />
+    <script type="application/ld+json">
+	    {
+	      "@context": "https://schema.org/",
+	      "@type": "WebSite",
+	      "name": "Free Online Decode JWT (JSON Web Tokens)",
+	      "author": {
+	        "@type": "Person",
+	        "name": "Rajat Goel"
+	      },
+	      "description": "Free and open-source tool for decoding JSON Web Tokens (JWTs) on the client side. No records are kept of any decoded tokens.",
+	      "image": "https://jwtdecode.com/logo.png"
+	    }
+    </script>
+    <link rel="stylesheet" href="./simple-grid.min.css">
+		<style type="text/css">
+			body {
+    	 font-family: sans-serif;
+			}
+
+			h1 {
+			  text-align: center;
+			}
+
+			.input-area {
+			  width: 100%;
+			  padding: 10px;
+			  margin-bottom: 10px;
+			}
+
+			#decode-button {
+				background-color: #000;
+			  color: #fff;
+			  padding: 10px;
+			  margin-bottom: 10px;
+			}
+			.center {
+			  display: block;
+			  margin-left: auto;
+			  margin-right: auto;
+			  width: 50%;
+			}
+		</style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9063753437547551" crossorigin="anonymous"></script>
   </head>
-  <body onload="decode()">
-    
-    <div class="container-fluid">
+  <body>
+  	<div class="container">
+			<div class="row">
+					<h1>Online Decode JWT</h1>
+			</div>
 
-		<!--nav class="navbar navbar-light bg-light">
-		  <a class="navbar-brand" href="#">
-		    <img src="./logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="Logo JWT decode">
-		    <h1>Online Decode JSON Web Tokens (JWTs)</h1>
-		  </a>
-		</nav-->
-		<h1>Online Decode JSON Web Tokens (JWTs)</h1>
+			<div class="row">
+				<div class="col-12">
+					<p>Paste your JWT token here</p>
+					<textarea id="jwt-token" placeholder="Paste your JWT token here" rows="2" class="input-area"></textarea>
+					<button id="decode-button">Decode</button>
+				</div>
+			</div>
 
-		
-		<div class="container mt-3">
-    	<form>
-	    	<div class="row">
-	    		<div class="col form-group">
-		  			<label for="encoded">Encoded (Paste token here)</label>
-		  			<textarea class="form-control" id="encoded" rows="20">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</textarea>
-		  		</div>
+			<div class="row">
+				<div class="col-12" id="decoded-token">
+					
+				</div>
+			</div>
 
-		  		<div class="col form-group">
-		  			<label for="header">Header (Algorithm)</label>
-		  			<textarea class="form-control" id="header" rows="4" readonly></textarea>
-		  			
-		  			<label for="payload">Payload data</label>
-		  			<textarea class="form-control" id="payload" rows="8" readonly></textarea>
-		  			
-		  			<label for="signature">Signature</label>
-		  			<textarea class="form-control" id="signature" rows="5" readonly></textarea>
-		  		</div>
-	    	</div>
+			<div class="row">
+				<div class="col-12">
+					<h2>What are JSON Web Tokens (JWTs)?</h2>
+  				<p>JSON Web Tokens (JWTs) are a open standard <a href="https://datatracker.ietf.org/doc/html/rfc7519">(RFC-7519)</a> and a way to securely send information between two parties. They are like digital keys that can be used to unlock resources. JWTs are typically used for authentication and authorization.</p>
 
-	    	<div class="row mt-2">
-	    		<div class="col form-group">
-	    			<button type="button" class="btn btn-primary" onclick="decode()">Decode</button>
-	    		</div>
-	    	</div>
-    	</form>
-    	</div>
+  				<h2>How do JWTs work?</h2>
+  				<p>A JWT is made up of three parts:</p>
 
+				  <ul>
+				    <li><b>Header:</b> The header contains information about the token, such as the type of token and the signing algorithm used.</li>
+				    <li><b>Payload:</b> The payload contains the claims, which are the pieces of information that are being transmitted. For example, the payload might contain the user's name, email address, and role.</li>
+				    <li><b>Signature:</b> The signature is a cryptographic hash of the header and payload, signed using the issuer's secret key.</li>
+				  </ul>
+
+  				<p>To verify a JWT, the receiver uses the issuer's public key to verify the signature. If the signature is valid, then the receiver can be confident that the token has not been tampered with and that the claims are authentic.</p>
+
+  				<h2>When are JWTs used?</h2>
+  				<p>JWTs are used in a variety of applications, including:</p>
+
+				  <ul>
+				    <li><b>Web applications:</b> JWTs can be used to authenticate and authorize users of web applications.</li>
+				    <li><b>APIs:</b> JWTs can be used to authenticate and authorize users of APIs.</li>
+				    <li><b>Microsevices:</b> JWTs can be used to authenticate and authorize communication between microservices.</li>
+				    <li><b>Single sign-on (SSO):</b> JWTs can be used to implement SSO, which allows users to log in to multiple applications using a single set of credentials.</li>
+				  </ul>
+
+  				<h2>Benefits of using JWTs</h2>
+  				<p>There are many benefits to using JWTs, including:</p>
+
+				  <ul>
+				    <li><b>Security:</b> JWTs are signed, which makes them difficult to tamper with. This can improve the security of your application.</li>
+				    <li><b>Flexibility:</b> JWTs can be used to transmit a variety of information, such as user identity, roles, and permissions. This flexibility can make it easier to implement different authentication and authorization schemes.</li>
+				    <li><b>Performance:</b> JWTs are lightweight and efficient, which can improve the performance of your application.</li>
+				  </ul>
+
+  				<h2>Example of how JWTs are used</h2>
+  				<p>Imagine you are developing a web application. You want to use JWTs to authenticate and authorize users.</p>
+
+  				<p>When a user logs in to your application, you will generate a JWT token and send it back to the user. The user will then store the JWT token in their browser.</p>
+
+  				<p>On subsequent requests, the user will include the JWT token in the HTTP Authorization header. You will then verify the JWT token to authenticate the user and authorize them to access the requested resource.</p>
+
+  				<hr>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<a href="https://github.com/rajatgl17/jwtdecode" class="center">
+						<img width="48" height="48" src="https://img.icons8.com/fluency/48/github.png" alt="github"/>
+					</a>
+				</div>
+			</div>
   	</div>
 
-    <script type="text/javascript">
-    	function base64DecodeAndJsonBeautify(value) {
-    		decoded_value = atob(value);
-    		try {
-    			return JSON.stringify(JSON.parse(decoded_value),null,2); 
-    		} catch (e) {
-    			console.log(e);
-    			error();
-    		}
-    	}
+    <script>
+    const jwtTokenInput = document.getElementById('jwt-token');
+    const decodeButton = document.getElementById('decode-button');
+    const decodedTokenDiv = document.getElementById('decoded-token');
 
-    	function decode() {
-    		token = document.getElementById("encoded").value;
-    		var parts = token.split('.');
+    decodeButton.addEventListener('click', () => {
+      const jwtToken = jwtTokenInput.value;
+      const decodedToken = decodeJwtToken(jwtToken);
+      decodedTokenDiv.innerHTML = `<pre>${JSON.stringify(decodedToken, null, 2)}</pre>`;
+    });
 
-    		if (parts.length !== 3) {
-				error();
-			} else {
-				document.getElementById("header").value = base64DecodeAndJsonBeautify(parts[0]);
-				document.getElementById("payload").value = base64DecodeAndJsonBeautify(parts[1]);
-				document.getElementById("signature").value = parts[2];
-			}
-    	}
-
-    	function error() {
-    		document.getElementById("header").value = '';
-    		document.getElementById("payload").value = '';
-    		document.getElementById("signature").value = '';
-    		alert('Invalid JWT token');
-    	}
-
-    </script>
+    function decodeJwtToken(jwtToken) {
+      const [header, payload, signature] = jwtToken.split('.');
+      const decodedHeader = JSON.parse(atob(header));
+      const decodedPayload = JSON.parse(atob(payload));
+      return {
+        header: decodedHeader,
+        payload: decodedPayload,
+        signature,
+      };
+    }
+  </script>
   </body>
 </html>
